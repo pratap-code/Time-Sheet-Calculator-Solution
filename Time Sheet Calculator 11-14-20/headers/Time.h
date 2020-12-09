@@ -2,7 +2,8 @@
 
 
 #include <iostream>
-
+#include<string>
+#include<sstream>
 
 
 //definition of time class

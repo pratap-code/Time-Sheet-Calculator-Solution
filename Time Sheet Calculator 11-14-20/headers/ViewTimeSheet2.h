@@ -11,3 +11,5 @@ std::string load_file_2();
 
 
 void read_time_sheet();
+
+// void compare_records(Entry&, Entry&);

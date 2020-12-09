@@ -1,6 +1,8 @@
 #pragma once
 
 #include<iostream>
+#include<string>
+#include<sstream>
 
 
 //definition for class date
@@ -23,8 +25,8 @@ public:
     void write_text(std::ostream&) const;
     void write_binary(std::ostream&) const;
 
-    void read_text(std::istream&);
-    void read_binary(std::istream&);
+    void read_text(std::string&);
+    void read_binary(std::string&);
 
 
 

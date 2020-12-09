@@ -1,6 +1,11 @@
 #pragma once
 
 
+#include<string>
+#include<sstream>
+#include<fstream>
+#include<vector>
+
 #include "Date.h"
 #include "Time.h"
 #include "Input.h"
@@ -40,13 +45,15 @@ public:
     void write_text(std::ostream&) const;
     void write_binary(std::ostream&) const;
 
-    void read_text(std::istream&);
+    void read_text(std::ifstream&);
     void read_binary(std::istream&);
 
 
     void display();
 
     void set_sno(int);
+
+    std::string parse(std::string const& str, std::string const& delim);
 };
 
 

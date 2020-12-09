@@ -119,19 +119,37 @@ void Entry::write_binary(std::ostream& o) const
 }
 
 
-void Entry::read_text(std::istream& i)
+void Entry::read_text(std::ifstream& file)
 {
-	char dot{};
-	i.read(reinterpret_cast<char*>(&sno), sizeof(sno));
-	i >> dot;
-	d.read_text(i);
-	intime.read_text(i);
-	outtime.read_text(i);
-	i >> mo;
-	i >> totaltime;
-	i >> totalpay;
-	i >> netpay;
-	i >> notes;
+	std::string line;
+	std::getline(file, line);
+	std::stringstream str(line);
+	std::string word;
+	std::vector<std::string>tokens;
+	
+	while (str >> word)
+	{
+		tokens.push_back(word);
+	}
+
+	//getting serial number
+	std::string temp_sno;
+	getline(std::cin, temp_sno, '.');
+
+
+
+	
+	//char dot{};
+	//i >> sno;
+	//i >> dot;
+	//d.read_text(i);
+	//intime.read_text(i);
+	//outtime.read_text(i);
+	//i >> mo;
+	//i >> totaltime;
+	//i >> totalpay;
+	//i >> netpay;
+	//i >> notes;
 }
 
 void Entry::read_binary(std::istream& i)
@@ -156,4 +174,9 @@ void Entry::read_binary(std::istream& i)
 void Entry::set_sno(int count)
 {
 	sno = count;
+}
+
+std::string parse(std::string const& str, std::string const& delim) 
+{
+	return str.substr(str.find(delim));
 }

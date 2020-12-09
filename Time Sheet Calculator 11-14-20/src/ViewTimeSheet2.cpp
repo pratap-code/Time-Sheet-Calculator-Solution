@@ -19,8 +19,12 @@ void read_time_sheet()
 	text_file.open(text_filename.c_str(), std::ios::in);
 	binary_file.open(binary_filename.c_str(), std::ios::in | std::ios::binary);
 
-	Entry e;
-	std::vector<Entry>records;
+	Entry text_e;
+	Entry binary_e;
+	std::vector<Entry>text_records;
+	std::vector<Entry>binary_records;
+
+
 
 
 
@@ -46,4 +50,6 @@ std::string load_file_2()
 	else
 		return filename;
 }
+
+
 

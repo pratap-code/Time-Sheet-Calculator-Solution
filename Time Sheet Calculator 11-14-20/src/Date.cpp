@@ -63,7 +63,7 @@ void Date::write_text(std::ostream& o) const
     o << day << "/" << month << "/" << year;
 }
 
-void Date::read_binary(std::istream& i)
+void Date::read_binary(std::string &part)
 {
     i.read(reinterpret_cast<char*>(&day), sizeof(day));
     i.read(reinterpret_cast<char*>(&month), sizeof(month));
