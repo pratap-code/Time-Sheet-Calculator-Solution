@@ -82,7 +82,7 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 
 			int sno{ get_int() };
 
-			if (sno<0 && sno>binary_records.size())
+			if (sno<=0 || sno>(binary_records.size()+1))
 			{
 				std::cout << "Invalid serial no. entered!!!" << std::endl;
 				return;
@@ -162,7 +162,10 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 void insert(std::vector<Entry>&records, int &sno, Entry &entry)
 {
 
-	records.insert((records.begin()+sno - 1), entry);
+	if (sno == (records.size()+1))
+		records.push_back(entry);
+	else
+		records.insert((records.begin()+sno - 1), entry);
 
 	for (unsigned int i = sno; i < records.size(); ++i)
 		records[i].mod_sno("insert");
@@ -174,7 +177,7 @@ void insert(std::vector<Entry>&records, int &sno, Entry &entry)
 void delete_rec(std::vector<Entry>&records, int s)
 {
 	unsigned int sno = static_cast<unsigned int>(s);
-	if (sno < 1)
+	if (sno < 1||sno>records.size())
 	{
 		std::cout << "WRONG SERIAL NUMBER ENTERED FOR DELETE OPERATION!!!" << std::endl;
 		return;
