@@ -3,7 +3,8 @@
 
 #include "..\headers\common.h"
 #include "..\headers\EnterData1.h"
-
+#include "..\headers\ViewTimeSheet2.h"
+#include "..\headers\ModifyTimeSheet3.h"
 
 
 void menu();
@@ -15,7 +16,6 @@ void menu();
 //still to finish
 void menu()
 {
-	std::string input_text;
 
 	std::cout << "******************TIME SHEET CALCULATOR******************" << std::endl << std::endl;
 
@@ -32,7 +32,7 @@ void menu()
 	}
 
 
-	int choice{ get_text(input_text) };
+	int choice{ get_int() };
 
 
 
@@ -47,17 +47,20 @@ void menu()
 	}
 	case 2:
 	{
-
+		read_time_sheet();
 		break;
 	}
 	case 3:
 	{
-
+		modify();
 		break;
 	}
 
 	default:
+	{
 		std::cout << "INVALID" << std::endl;
+		break;
+	}
 	}
 }
 

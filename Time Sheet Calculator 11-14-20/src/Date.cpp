@@ -47,23 +47,19 @@ void Date::construct(int emonth, int eday)
 
 void Date::display()
 {
-    std::cout << month << "/" << day << "/" << year;
+    std::cout << day << "/" << month << "/" << year;
 }
 
 
-void Date::write_binary(std::ostream& o) const
+void Date::write_binary(std::ofstream& o) const
 {
     o.write(reinterpret_cast<const char*>(&day), sizeof(day));
     o.write(reinterpret_cast<const char*>(&month), sizeof(month));
     o.write(reinterpret_cast<const char*>(&year), sizeof(year));
 }
 
-void Date::write_text(std::ostream& o) const
-{
-    o << day << "/" << month << "/" << year;
-}
 
-void Date::read_binary(std::string &part)
+void Date::read_binary(std::ifstream &i)
 {
     i.read(reinterpret_cast<char*>(&day), sizeof(day));
     i.read(reinterpret_cast<char*>(&month), sizeof(month));
@@ -71,8 +67,7 @@ void Date::read_binary(std::string &part)
 }
 
 
-void Date::read_text(std::istream& i)
+void Date::write_text(std::ofstream& o) const
 {
-    char slash{};
-    i >> day >> slash >> month >> slash >> year;
+    o << day << "/" << month << "/" << year;
 }

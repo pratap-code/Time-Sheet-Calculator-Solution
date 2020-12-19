@@ -3,4 +3,5 @@
 #include<string>
 #include<sstream>
 
-int get_text(std::string&);
+int get_int();
+

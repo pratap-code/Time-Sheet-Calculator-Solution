@@ -82,9 +82,9 @@ void Entry::display()
 
 
 
-void Entry::write_text(std::ostream& o) const
+void Entry::write_text(std::ofstream& o) const
 {
-	o << sno << ". ";
+	o << sno << "* ";
 	d.write_text(o);
 	o << " ";
 	intime.write_text(o);
@@ -103,7 +103,7 @@ void Entry::write_text(std::ostream& o) const
 }
 
 
-void Entry::write_binary(std::ostream& o) const
+void Entry::write_binary(std::ofstream& o) const
 {
 	o.write(reinterpret_cast<const char*>(&sno), sizeof(sno));
 	d.write_binary(o);
@@ -115,53 +115,45 @@ void Entry::write_binary(std::ostream& o) const
 	o.write(reinterpret_cast<const char*>(&netpay), sizeof(netpay));
 	size_t size = notes.size();
 	o.write(reinterpret_cast<const char*>(&size), sizeof(size));
-	o.write(notes.c_str(), sizeof(size));
+	o.write(notes.c_str(), size);
 }
 
 
-void Entry::read_text(std::ifstream& file)
+void Entry::read_text(std::string line)
 {
-	std::string line;
-	std::getline(file, line);
-	std::stringstream str(line);
-	std::string word;
-	std::vector<std::string>tokens;
-	
-	while (str >> word)
-	{
-		tokens.push_back(word);
-	}
+	std::stringstream tokens(line);
 
-	//getting serial number
-	std::string temp_sno;
-	getline(std::cin, temp_sno, '.');
+	int t_sno = 0, t_day = 0, t_month = 0, t_year = 0, t_inhour = 0, t_inmin = 0, t_outhour = 0, t_outmin = 0;
+	char t_inap = 'n', t_outap = 'n';
+	double t_mo = 0.0, t_totaltime = 0.0, t_totalpay = 0.0, t_netpay = 0.0;
+	std::string t_notes;
 
+	tokens >> t_sno >> t_day >> t_month >> t_year >> t_inhour >> t_inmin >> t_inap >> t_outhour >> t_outmin >> t_outap >> t_mo >> t_totaltime >> t_totalpay >> t_netpay >> t_notes;
 
-
-	
-	//char dot{};
-	//i >> sno;
-	//i >> dot;
-	//d.read_text(i);
-	//intime.read_text(i);
-	//outtime.read_text(i);
-	//i >> mo;
-	//i >> totaltime;
-	//i >> totalpay;
-	//i >> netpay;
-	//i >> notes;
+	sno = t_sno;
+	d.construct(t_month, t_day);
+	intime.construct(t_inhour, t_inmin, t_inap);
+	outtime.construct(t_outhour, t_outmin, t_outap);
+	mo = t_mo;
+	totaltime = t_totaltime;
+	totalpay = t_totalpay;
+	netpay = t_netpay;
+	notes = t_notes;
 }
 
-void Entry::read_binary(std::istream& i)
+
+
+void Entry::read_binary(std::ifstream& i)
 {
+
 	i.read(reinterpret_cast<char*>(&sno), sizeof(sno));
-	intime.read_binary(i);
-	outtime.read_binary(i);
-	i.read(reinterpret_cast<char*>(&mo), sizeof(mo));
-	i.read(reinterpret_cast<char*>(&totaltime), sizeof(totaltime));
-	i.read(reinterpret_cast<char*>(&totalpay), sizeof(totalpay));
-	i.read(reinterpret_cast<char*>(&netpay), sizeof(netpay));
-	i.read(reinterpret_cast<char*>(&mo), sizeof(mo));
+	d.read_binary(i);		
+	intime.read_binary(i);	
+	outtime.read_binary(i);	
+	i.read(reinterpret_cast<char*>(&mo), sizeof(mo));	
+	i.read(reinterpret_cast<char*>(&totaltime), sizeof(totaltime));	
+	i.read(reinterpret_cast<char*>(&totalpay), sizeof(totalpay));	
+	i.read(reinterpret_cast<char*>(&netpay), sizeof(netpay));		
 	size_t size;
 	if (i.read(reinterpret_cast<char*>(&size), sizeof(size)))
 	{
@@ -176,7 +168,19 @@ void Entry::set_sno(int count)
 	sno = count;
 }
 
-std::string parse(std::string const& str, std::string const& delim) 
+
+int Entry::get_sno()
 {
-	return str.substr(str.find(delim));
+	return sno;
+}
+
+
+void Entry::mod_sno(const char* mod_type)
+{
+	if (mod_type == "insert")
+		++sno;
+	else if (mod_type == "delete")
+		--sno;
+	else
+		char c{ '0' };
 }

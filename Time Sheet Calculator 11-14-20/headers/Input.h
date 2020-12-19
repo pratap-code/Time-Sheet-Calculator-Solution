@@ -57,4 +57,6 @@ public:
     char getinap();
     char getoutap();
     std::string getnotes();
+
+    void get_mod_input();
 };

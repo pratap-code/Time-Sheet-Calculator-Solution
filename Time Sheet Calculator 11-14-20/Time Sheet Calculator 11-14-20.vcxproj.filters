@@ -36,6 +36,9 @@
     <ClInclude Include="headers\ViewTimeSheet2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\ModifyTimeSheet3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\ViewTimeSheet2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModifyTimeSheet3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

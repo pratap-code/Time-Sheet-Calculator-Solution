@@ -42,18 +42,21 @@ public:
     void construct(Input&);
 
 
-    void write_text(std::ostream&) const;
-    void write_binary(std::ostream&) const;
+    void write_text(std::ofstream&) const;
+    void write_binary(std::ofstream&) const;
 
-    void read_text(std::ifstream&);
-    void read_binary(std::istream&);
+    void read_text(std::string);
+    void read_binary(std::ifstream&);
 
 
     void display();
 
     void set_sno(int);
 
-    std::string parse(std::string const& str, std::string const& delim);
+    int get_sno();
+
+    void mod_sno(const char*);
+
 };
 
 

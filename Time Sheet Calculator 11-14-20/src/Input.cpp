@@ -201,3 +201,35 @@ void Input::auto_set_date(int &month, int &day)  // check for 0 value of temp
 
 
 
+void Input::get_mod_input()
+{
+    std::cout << "Please enter the entry FORMAT( MM DD | (I)HH MM AP | (O)HH MM AP | MO | NOTES ) :" << std::endl;
+    getline(std::cin, user_input);
+    std::stringstream temp{ user_input };
+
+    ss.str("");
+    ss.clear();
+    ss.seekp(0L, std::ios::beg);
+
+    ss << user_input;
+
+    int count{};
+    std::string word;
+
+    while (temp >> word)
+        count++;
+
+    if (count == 8)
+        ss << " " << 0.00 << " " << "-----";
+    else if (count == 9)
+        ss << " " << "-----";
+    else if (count == 10)
+    {
+        char c{ '0' };
+    }
+    else
+        std::cout << "Input ERROR!!!" << std::endl;
+
+    user_input.clear();
+
+}

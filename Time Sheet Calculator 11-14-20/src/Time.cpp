@@ -60,13 +60,13 @@ void Time::display()
 }
 
 
-void Time::write_text(std::ostream& o) const
+void Time::write_text(std::ofstream& o) const
 {
     o << hours << ":" << mins << " " << ap;
 }
 
 
-void Time::write_binary(std::ostream& o) const
+void Time::write_binary(std::ofstream& o) const
 {
     o.write(reinterpret_cast<const char*>(&hours), sizeof(hours));
     o.write(reinterpret_cast<const char*>(&mins), sizeof(mins));
@@ -74,14 +74,8 @@ void Time::write_binary(std::ostream& o) const
 }
 
 
-void Time::read_text(std::istream& i)
-{
-    char colon{};
-    i >> hours >> colon >> mins >> ap;
-}
 
-
-void Time::read_binary(std::istream& i)
+void Time::read_binary(std::ifstream& i)
 {
     i.read(reinterpret_cast<char*>(&hours), sizeof(hours));
     i.read(reinterpret_cast<char*>(&mins), sizeof(mins));

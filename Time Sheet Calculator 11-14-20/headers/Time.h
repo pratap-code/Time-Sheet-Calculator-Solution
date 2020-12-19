@@ -4,6 +4,7 @@
 #include <iostream>
 #include<string>
 #include<sstream>
+#include<fstream>
 
 
 //definition of time class
@@ -20,11 +21,10 @@ public:
     void reset();
 
 
-    void write_text(std::ostream&) const;
-    void write_binary(std::ostream&) const;
+    void write_text(std::ofstream&) const;
+    void write_binary(std::ofstream&) const;
 
-    void read_text(std::istream&);
-    void read_binary(std::istream&);
+    void read_binary(std::ifstream&);
 
     void construct(int, int, char);
 

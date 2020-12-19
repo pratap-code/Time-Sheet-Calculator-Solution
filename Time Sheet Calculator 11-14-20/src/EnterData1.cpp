@@ -9,14 +9,13 @@ std::string load_file()
 {
 
 	std::string file_name;
-	std::string input_text;
 
 	std::cout << "Which file would you like to load ? " << std::endl;
 
 	std::cout << "1. Load the last opened file" << std::endl;
 	std::cout << "2. Create a new file" << std::endl;
 
-	int choice{ get_text(input_text) };
+	int choice{ get_int() };
 
 
 	switch (choice)
@@ -95,7 +94,7 @@ void enter_data()
 
 
 
-void open_file(std::ifstream& file_op, std::string& filename_op, std::string filetype) // open and check file for ifstream for either file types
+void open_file(std::ifstream& file_op, std::string& filename_op, const char* filetype) // open and check file for ifstream for either file types
 {
 
 	if (filetype == "text")
@@ -119,7 +118,7 @@ void open_file(std::ifstream& file_op, std::string& filename_op, std::string fil
 		std::cout << "File opened successfully..." << std::endl;
 }
 
-void open_file(std::ofstream& file_op, std::string& filename_op, std::string filetype) // open and check file for ofstream for either file types
+void open_file(std::ofstream& file_op, std::string& filename_op, const char* filetype) // open and check file for ofstream for either file types
 {
 	if (filetype == "text")
 	{
@@ -172,14 +171,15 @@ void create_vector(Input& input, Entry& entry, std::vector<Entry>& records)
 }
 
 
-void write_to_file(std::ostream& file, std::vector<Entry>& records, std::string FORMAT)
+void write_to_file(std::ofstream& file, std::vector<Entry> &records, const char* FORMAT)
 {
 	if (FORMAT == "TEXT")
 	{
 		for (unsigned int i = 0; i < records.size(); ++i)
 		{
 			records[i].write_text(file);
-			file << std::endl;
+			if(i<(records.size()-1))
+				file << std::endl;
 		}
 	}
 
@@ -188,7 +188,6 @@ void write_to_file(std::ostream& file, std::vector<Entry>& records, std::string 
 		for (unsigned int i = 0; i < records.size(); ++i)
 		{
 			records[i].write_binary(file);
-			file << std::endl;
 		}
 	}
 
