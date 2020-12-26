@@ -20,3 +20,6 @@ std::string tokenize(std::string const&);
 void read_records(std::ifstream&, Entry&, std::vector<Entry>&, const char*);
 
 void display_records(std::vector<Entry>& records, const char*);
+
+
+bool check_records(std::vector<Entry>&, std::vector<Entry>&);

@@ -3,6 +3,7 @@
 
 void modify()
 {
+
 	std::cout << "*******3. Modify Time Sheet*******" << std::endl;
 	std::ifstream text_file;
 	std::ifstream binary_file;
@@ -31,14 +32,25 @@ void modify()
 
 		std::cout << "Records successfully Loaded!" << std::endl;
 
-		std::string choice{ "y" };
-
-		while (choice == "y")
+		if (check_records(text_records, binary_records))
 		{
+			std::cout << "RECORDS VERIFIED!!!" << std::endl;
+			
+			std::string choice{ "y" };
 
-			modify_records(text_records, binary_records);
-			std::cout << "Do you want to continue editing vector ? : ";
-			getline(std::cin, choice);
+			while (choice == "y")
+			{
+
+				modify_records(text_records, binary_records);
+				std::cout << "Do you want to continue editing vector ? : ";
+				getline(std::cin, choice);
+			}
+		}
+		else
+		{
+			std::cout << "FATAL ERROR!!! TEXT AND BINARY RECORDS DO NOT MATCH!!!" << std::endl;
+			std::cout << "Now returning to the main menu..." << std::endl;
+			return;
 		}
 
 
@@ -58,6 +70,25 @@ void modify()
 	binary_file.close();
 
 
+	std::cout << "NEW RECORDS READY TO SAVE. Do you replace files " << text_filename << " " << binary_filename
+		<< " and save modified records ? ( 'y' for yes, any other key for no ) : ";
+
+	std::string choice;
+	getline(std::cin, choice);
+
+	if (choice == "y")
+	{
+		std::cout << "Writing modified data to new files...\n\n";
+		write_modified_data(binary_records, text_filename, binary_filename);
+	}
+	else
+	{
+		std::cout << "Returning to the main menu..." << std::endl << std::endl;
+		return;
+	}
+
+
+
 
 
 
@@ -66,21 +97,49 @@ void modify()
 
 void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_records)
 {
+	
 	std::cout << "What would you like to do? : "<<std::endl;
-	std::cout << "1. Insert an entry" << std::endl;
-	std::cout << "2. Delete an entry" << std::endl;
-	std::cout << "3. Modify an entry" << std::endl;
+	std::cout << "1. Add entries" << std::endl;
+	std::cout << "2. Insert an entry" << std::endl;
+	std::cout << "3. Delete an entry" << std::endl;
+	std::cout << "4. Modify an entry" << std::endl;
 
 	int choice{ get_int() };
 
 	switch (choice)
 	{
+		
 		case 1:
+		{
+			std::cout << "##### ADD ENTRIES TO EXISTING TIME SHEET #####" << std::endl << std::endl;
+
+			std::cout << "Currently contained records..." << std::endl;
+			display_vector( binary_records );
+
+			std::cout << std::endl;
+			std::cout << std::endl;
+
+			std::cout << "Begin entering records..." << std::endl;
+			add_records(binary_records);
+
+			std::cout << std::endl;
+			std::cout << std::endl;
+
+			std::cout <<"Records after adding records..."<< std::endl;
+			display_vector(binary_records);
+
+
+			break;
+		}
+	
+		case 2:
 		{
 			std::cout << "+++++ INSERT AN ENTRY +++++" << std::endl << std::endl;
 			std::cout << "Enter the serial number where you would like to insert the entry : ";
 
 			int sno{ get_int() };
+
+
 
 			if (sno<=0 || sno>(binary_records.size()+1))
 			{
@@ -104,7 +163,7 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 			insert(text_records, sno, entry);
 			insert(binary_records, sno, entry);
 
-			std::cout << "Displaying new vector data for both text and binary :" << std::endl;
+			std::cout << std::endl << "Displaying new vector data for both text and binary :" << std::endl << std::endl;
 			
 			display_vector(text_records);
 			display_vector(binary_records);
@@ -115,12 +174,18 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 			break;
 		
 		}
-		case 2:
+		case 3:
 		{
+
 			std::cout << "----- Delete an entry -----" << std::endl << std::endl;
 			
 			std::cout << "Please enter the serial no. of the entry you'd like to delete : ";
 			int sno{ get_int() };
+			
+			std::cout << std::endl << std::endl;
+			display_vector(text_records);
+			std::cout<<std::endl;
+			display_vector(binary_records);
 			std::cout << "Delete entry at serial no. " << sno << " ? : ";
 			std::string choice;
 			getline(std::cin, choice);
@@ -138,7 +203,7 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 
 			break;
 		}
-		case 3:
+		case 4:
 		{
 			
 
@@ -147,7 +212,7 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 		}
 		default:
 		{
-			std::cout << "INVALID CHOICE ENTERED!!!" << std::endl;
+			std::cout << "INVALID CHOICE ENTERED!!! \n Returning to the main menu..." << std::endl;
 			break;
 		}
 
@@ -195,4 +260,67 @@ void delete_rec(std::vector<Entry>&records, int s)
 
 
 	std::cout << "Entry deleted successfully!" << std::endl;
+}
+
+
+
+void add_records(std::vector<Entry>&records)
+{
+	Input input;
+	Entry entry;
+
+	
+	size_t no = records.size();
+
+	
+	std::string choice;
+	int stored_day{ records[no - 1].get_Date("day") + 1 };
+	int stored_month{ records[no - 1].get_Date("month") };
+	int stored_sno{ records[no-1].get_sno() + 1};
+
+	do
+	{
+		do
+		{
+			int temp_sno{ stored_sno };
+			input.reset();
+			entry.reset();
+			input.get_input(stored_month, stored_day);
+			input.process_data();
+			entry.construct(input);
+			entry.set_sno(temp_sno);
+		} while (!entry.check_entry_validity());
+
+		records.push_back(entry);
+
+		++stored_sno;
+
+		std::cout << "Do you wish to enter more ? ";
+		getline(std::cin, choice);
+	} while (choice == "y");
+}
+
+
+void write_modified_data(std::vector<Entry>&records, std::string &text_filename, std::string &binary_filename )
+{
+	std::ofstream new_text_file;
+	std::ofstream new_binary_file;
+
+
+	new_text_file.open(text_filename.c_str(), std::ios::out | std::ios::trunc);
+	new_binary_file.open(binary_filename.c_str(), std::ios::out | std::ios::binary | std::ios::trunc);
+
+	if (records.empty())
+	{
+		std::cout << "Records are empty...\nReturning to 3. Modify function..." << std::endl;
+		return;
+	}
+	else
+	{
+		write_to_file(new_text_file, records, "TEXT");
+		write_to_file(new_binary_file, records, "BINARY");
+
+		std::cout << "WRITING NEW FILES SUCCESSFULL!!!\nReturning to 3. Modify Time Sheet..." << std::endl;
+
+	}
 }

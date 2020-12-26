@@ -5,6 +5,8 @@
 
 void read_time_sheet()
 {
+	
+
 	std::ifstream text_file;
 	std::ifstream binary_file;
 	std::string filename;
@@ -38,9 +40,19 @@ void read_time_sheet()
 	read_records(text_file, text_e, text_records, "text");
 	read_records(binary_file, binary_e, binary_records, "binary");
 
+	if (check_records(text_records, binary_records))
+		std::cout << "RECORDS VERIFIED!" << std::endl << std::endl;
+
+	else
+	{
+		std::cout << "FATAL ERROR!!! \t text and binary records do not match!!!" << std::endl;
+	}
+
 	display_records(text_records, "text");
 	std::cout << std::endl << std::endl;
 	display_records(binary_records, "binary");
+
+
 
 	text_file.close();
 	binary_file.close();
@@ -51,6 +63,8 @@ void read_time_sheet()
 
 std::string load_file_2()
 {
+
+
 	std::string filename;
 	std::cout << "Enter the name of file you want to load or enter 'l' to open last loaded file : ";
 	getline(std::cin, filename);
@@ -102,7 +116,7 @@ void read_records(std::ifstream &file, Entry &e,std::vector<Entry>&records,const
 	}
 	else if (type == "binary")
 	{
-		std::cout << "READING BINARY FILE CONTENTS : " << std::endl;
+		std::cout << "READING BINARY FILE CONTENTS... " << std::endl;
 		while (true)
 		{
 			e.read_binary(file);
@@ -139,4 +153,20 @@ void display_records(std::vector<Entry>& records, const char* type)
 		}
 	}
 
+}
+
+
+bool check_records(std::vector<Entry>& text_records, std::vector<Entry>& binary_records)
+{
+	bool result=false;
+
+	for (size_t i = 0; i < binary_records.size(); ++i)
+	{
+		if (text_records[i] == binary_records[i])
+			result = true;
+		else
+			result = false;
+	}
+
+	return result;
 }

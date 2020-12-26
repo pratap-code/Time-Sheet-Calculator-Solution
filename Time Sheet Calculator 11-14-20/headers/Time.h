@@ -29,5 +29,7 @@ public:
     void construct(int, int, char);
 
     void display();
+
+    friend bool operator==(const Time&, const Time&);
 };
 

@@ -9,6 +9,7 @@
 //definition for class date
 class Date
 {
+       
     int day;
     int month;
     int year;
@@ -34,6 +35,13 @@ public:
 
     void display();
 
+    int get_day();
+
+    int get_month();
+
+    int get_year();
+
+    friend bool operator==(const Date&, const Date&);
 
 };
 

@@ -184,3 +184,29 @@ void Entry::mod_sno(const char* mod_type)
 	else
 		char c{ '0' };
 }
+
+
+int Entry::get_Date(const char* type)
+{
+	int value{};
+
+	if (type == "day")
+		value=d.get_day();
+	else if (type == "month")
+		value=d.get_month();
+	else if (type == "year")
+		value=d.get_year();
+	else
+		std::cout << "Something went wrong while loading date from RECORDS ON THE HARD DRIVE!!!" << std::endl;
+
+	return value;
+}
+
+bool operator==(const Entry& e1, const Entry& e2)
+{
+	if (e1.sno == e2.sno && e1.d == e2.d && e1.intime == e2.intime && e1.outtime == e2.outtime && e1.mo == e2.mo
+		&& e1.totaltime == e2.totaltime && e1.totalpay == e2.totalpay && e1.netpay == e2.netpay && e1.notes == e2.notes)
+		return true;
+	else
+		return false;
+}

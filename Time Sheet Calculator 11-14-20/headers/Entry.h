@@ -57,6 +57,10 @@ public:
 
     void mod_sno(const char*);
 
+    int get_Date(const char*);
+
+    friend bool operator==(const Entry&, const Entry&);
+
 };
 
 

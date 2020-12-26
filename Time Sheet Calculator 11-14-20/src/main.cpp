@@ -11,6 +11,7 @@ void menu();
 int main()
 {
 	//declaration of variables
+
 	std::string choice{ "y" };
 	while (choice == "y")
 	{
@@ -19,7 +20,7 @@ int main()
 		getline(std::cin, choice);
 	}
 	std::cout << std::endl << "Exiting program!!! THANK YOU FOR USING TIME SHEET CALCULATOR BY PRATAP :)" << std::endl;
-	
+		
 	return 0;
 }
 

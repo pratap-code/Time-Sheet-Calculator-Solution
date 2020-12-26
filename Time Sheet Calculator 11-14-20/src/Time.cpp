@@ -81,3 +81,13 @@ void Time::read_binary(std::ifstream& i)
     i.read(reinterpret_cast<char*>(&mins), sizeof(mins));
     i.read(reinterpret_cast<char*>(&ap), sizeof(ap));
 }
+
+
+
+bool operator==(const Time& t1, const Time& t2)
+{
+    if (t1.hours == t2.hours && t1.mins == t2.mins && t1.ap == t2.ap)
+        return true;
+    else
+        return false;
+}
