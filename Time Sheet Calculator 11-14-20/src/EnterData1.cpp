@@ -40,6 +40,7 @@ std::string load_file()
 	{
 		std::cout << "Invalid Choice" << std::endl;
 		std::cout << "\n Returning to enter data..." << std::endl;
+		break;
 	}
 	}
 
@@ -83,19 +84,29 @@ void enter_data()
 
 	
 
-	std::cout << "Writing records to files " << filename_t << " and " << filename_b << std::endl;
+	
 
 	std::string choice;
 	std::cout << "Do you want to write the entries to the file? : ";
+	
+	getline(std::cin, choice);
 
+	if (choice == "y")
+	{
+		std::cout << "Writing records to files " << filename_t << " and " << filename_b << std::endl;
+		
+		write_to_file(text_file, records, "TEXT");
+		write_to_file(binary_file, records, "BINARY");
 
-	write_to_file(text_file, records, "TEXT");
-	write_to_file(binary_file, records, "BINARY");
+		std::cout << "File write successfull..." << std::endl;
+	}
+	else
+		std::cout << "Writing records to files CANCELLED!!!" << std::endl;
 
 	text_file.close();
 	binary_file.close();
 
-	std::cout << "File write successfull..." << std::endl;
+	
 
 
 }
@@ -153,7 +164,7 @@ void open_file(std::ofstream& file_op, std::string& filename_op, const char* fil
 void create_vector(Input& input, Entry& entry, std::vector<Entry>& records)
 {
 	std::string choice;
-	int stored_day{ 0 }, stored_month{ 0 }, stored_sno{ 1 };
+	int stored_day{ 0 }, stored_month{ 0 }, stored_sno{ 1 }, stored_year{ 0 };
 
 	do
 	{
@@ -162,7 +173,7 @@ void create_vector(Input& input, Entry& entry, std::vector<Entry>& records)
 			int temp_sno{ stored_sno };
 			input.reset();
 			entry.reset();
-			input.get_input(stored_month, stored_day);
+			input.get_input( stored_day, stored_month, stored_year );
 			input.process_data();
 			entry.construct(input);
 			entry.set_sno(temp_sno);
@@ -171,6 +182,7 @@ void create_vector(Input& input, Entry& entry, std::vector<Entry>& records)
 		records.push_back(entry);
 
 		++stored_sno;
+		++stored_day;
 
 		std::cout << "Do you wish to enter more ? ";
 		getline(std::cin, choice);

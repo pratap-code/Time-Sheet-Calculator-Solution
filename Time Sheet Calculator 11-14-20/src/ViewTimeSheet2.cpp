@@ -85,7 +85,7 @@ std::string load_file_2()
 std::string tokenize(std::string const& line)
 {
 	std::string temp(line);
-	std::size_t found = temp.find_first_of("*/:");
+	std::size_t found = temp.find_first_of("*/:->|");
 
 	if (found == std::string::npos)
 		std::cout << "BAD FILE FORMAT!!!" << std::endl;
@@ -93,7 +93,7 @@ std::string tokenize(std::string const& line)
 	while (found != std::string::npos)
 	{
 		temp[found] = ' ';
-		found = temp.find_first_of("*/:",found+1);
+		found = temp.find_first_of("*/:->|",found+1);
 	}
 
 	return temp;

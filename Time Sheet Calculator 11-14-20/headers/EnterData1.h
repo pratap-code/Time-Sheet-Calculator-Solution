@@ -1,9 +1,7 @@
 #pragma once
 
-#include<vector>
-#include<fstream>
 
-#include "..\headers\common.h"
+#include "common.h"
 #include "..\headers\Entry.h"
 
 

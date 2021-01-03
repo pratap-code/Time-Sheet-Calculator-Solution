@@ -1,9 +1,9 @@
 #pragma once
 
-#include <string>
-#include<sstream>
-#include "Date.h"
-#include "Time.h"
+#include "common.h"
+
+#include "..\headers\Date.h"
+#include "..\headers\Time.h"
 
 
 
@@ -14,7 +14,7 @@ class Input
     std::stringstream ss;
 
     //datamembers to be sent
-    int eday, emonth, eihours, eimins, eohours, eomins;
+    int eiday, eimonth, eiyear, eihours, eimins, eoday, eomonth, eoyear, eohours, eomins;
     double emo;
     char eiap, eoap;
     std::string enotes;
@@ -22,7 +22,7 @@ class Input
 public:
     Input();
 
-    void get_input(int&,int&);
+    void get_input(int&,int&, int&);
     
     void process_data();
 
@@ -36,7 +36,7 @@ public:
 
     
 
-    void auto_set_date(int&,int&);
+    void auto_set_date(int&, int&, int&);
 
    
 
@@ -47,15 +47,26 @@ public:
 
     //getter functions
 
-    int getday();
-    int getmonth();
+    int getoday();
+    
+    int getomonth();
+    int getoyear();
+
+    int getiday();
+    int getimonth();
+    int getiyear();
+
     int getinhours();
     int getinmins();
+
     int getouthours();
     int getoutmins();
+
     double getmo();
+
     char getinap();
     char getoutap();
+
     std::string getnotes();
 
     void get_mod_input();

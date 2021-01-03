@@ -1,14 +1,9 @@
 #pragma once
 
+#include "common.h"
 
-#include<string>
-#include<sstream>
-#include<fstream>
-#include<vector>
-
-#include "Date.h"
-#include "Time.h"
-#include "Input.h"
+#include "..\headers\DateTime.h"
+#include "..\headers\Input.h"
 
 
 
@@ -21,9 +16,9 @@ class Entry
 {
 
     int sno;
-    Date d;
-    Time intime;
-    Time outtime;
+    DateTime intime;
+    DateTime outtime;
+
     double mo;
     double totaltime;
     double totalpay;

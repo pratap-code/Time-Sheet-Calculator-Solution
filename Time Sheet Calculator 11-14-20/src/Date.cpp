@@ -12,36 +12,32 @@ Date::Date(int day_value, int month_value, int year_value) : day{ day_value }, m
 
 bool Date::check_date_validity()
 {
-    if (day < 0 || day>31 || month < 0 || month>12 || year != 2020)
+    if (day > 0 && day <= 31 && month > 0 && month <= 12 && year >= 2020 )
+        return true;
+    else
     {
         std::cout << "Invalid date entered" << std::endl;
         return false;
     }
-    else
-        return true;
 }
 
-void Date::set_date(int dayVal, int monthVal)
-{
-    day = dayVal;
-    month = monthVal;
-}
 
 
 void Date::reset()
 {
     day = 0;
     month = 0;
-    year = 2020;
+    year = 0;
 }
 
 
 
 
-void Date::construct(int emonth, int eday)
+void Date::construct(int eday, int emonth, int eyear)
 {
-    month = emonth;
     day = eday;
+    month = emonth;
+    year = eyear;
 }
 
 

@@ -1,9 +1,6 @@
 #pragma once
 
-#include<iostream>
-#include<string>
-#include<sstream>
-#include<fstream>
+#include "common.h"
 
 
 //definition for class date
@@ -15,9 +12,9 @@ class Date
     int year;
 
 public:
-    Date(int day = 0, int month = 0, int year = 2020);
+    Date(int day = 0, int month = 0, int year = 0);
 
-    void set_date(int dayVal, int monthVal);
+    
 
     bool check_date_validity();
 
@@ -31,7 +28,7 @@ public:
 
 
 
-    void construct(int, int);
+    void construct(int, int, int);
 
     void display();
 

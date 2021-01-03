@@ -1,8 +1,11 @@
 #pragma once
-#include<iostream>
-#include<string>
-#include<sstream>
-#include<stdlib.h>
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
+#include <stdlib.h>
+
 
 int get_int();
 

@@ -139,9 +139,8 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 
 			int sno{ get_int() };
 
-
-
-			if (sno<=0 || sno>(binary_records.size()+1))
+		
+			if ( sno <= 0 || sno > (binary_records.size()+1) )
 			{
 				std::cout << "Invalid serial no. entered!!!" << std::endl;
 				return;
@@ -276,6 +275,7 @@ void add_records(std::vector<Entry>&records)
 	std::string choice;
 	int stored_day{ records[no - 1].get_Date("day") + 1 };
 	int stored_month{ records[no - 1].get_Date("month") };
+	int stored_year{ records[no - 1].get_Date("year")  };
 	int stored_sno{ records[no-1].get_sno() + 1};
 
 	do
@@ -285,7 +285,7 @@ void add_records(std::vector<Entry>&records)
 			int temp_sno{ stored_sno };
 			input.reset();
 			entry.reset();
-			input.get_input(stored_month, stored_day);
+			input.get_input(stored_day, stored_month, stored_year );
 			input.process_data();
 			entry.construct(input);
 			entry.set_sno(temp_sno);

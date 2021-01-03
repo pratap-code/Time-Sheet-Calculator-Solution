@@ -1,11 +1,6 @@
 #pragma once
 
-
-#include <iostream>
-#include<string>
-#include<sstream>
-#include<fstream>
-
+#include "common.h"
 
 //definition of time class
 class Time

@@ -7,20 +7,22 @@ Time::Time(int hours_val, int mins_val, char ap_val) : hours{ hours_val }, mins{
 
 bool Time::check_time_validity()
 {
-    if (hours < 0 || hours>12 || mins < 0 || mins>60)
+    bool result{};
+    if (hours > 0 && hours <= 12 && mins >= 0 && mins < 60)
     {
-        std::cout << "Invalid time entered " << std::endl;
-        return false;
+        if (ap == 'a' || ap == 'p')
+            result = true;
+        else
+            result = false;
     }
-    if (ap != 'a')
-    {
-        if (ap != 'p')
-        {
-            std::cout << "Invalid time entered " << std::endl;
-            return false;
-        }
-    }
-    return true;
+
+    else
+        result = false;
+
+    if (!result)
+        std::cout << "INVALID TIME ENTERED!!!" << std::endl;
+
+    return result;
 }
 
 

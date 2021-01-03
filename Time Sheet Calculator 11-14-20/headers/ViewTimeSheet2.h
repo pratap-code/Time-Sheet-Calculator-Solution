@@ -1,9 +1,6 @@
 #pragma once
 
-#include<fstream>
-#include<iostream>
-#include<string>
-#include<vector>
+#include "common.h"
 
 #include "..\headers\Entry.h"
 

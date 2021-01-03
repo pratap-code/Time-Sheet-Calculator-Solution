@@ -12,9 +12,3 @@ int get_int()
 	}
 	return Choice;
 }
-
-
-void clrscr()
-{
-	std::cout << std::string(100, '\n');
-}
