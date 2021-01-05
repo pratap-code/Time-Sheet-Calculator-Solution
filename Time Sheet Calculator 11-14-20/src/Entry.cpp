@@ -59,8 +59,7 @@ void Entry::display()
 	intime.display();
 	std::cout << " | ";
 	outtime.display();
-	std::cout << " | ";
-	std::cout << " | " << mo << " | " << " | " << totaltime << " | " << totalpay << " | " << netpay << " | " << "'" << notes << "'" << std::endl;
+	std::cout << " | " << mo << " | " << totaltime << " | " << totalpay << " | " << netpay << " | " << "'" << notes << "'" << std::endl;
 }
 
 

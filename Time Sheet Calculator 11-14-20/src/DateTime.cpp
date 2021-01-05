@@ -28,7 +28,7 @@ bool DateTime::check_DateTime_validity()
 void DateTime::write_text(std::ofstream& o) const
 {
 	date.write_text(o);
-	o << "->";
+	o << " ~> ";
 	time.write_text(o);
 }
 
@@ -55,7 +55,7 @@ void DateTime::construct(int day, int month, int year, int hour, int min, char a
 void DateTime::display()
 {
 	date.display();
-	std::cout << "->";
+	std::cout << " ~> ";
 	time.display();
 }
 

@@ -3,13 +3,14 @@
 #include "common.h"
 
 #include "..\headers\Entry.h"
+#include "..\headers\EnterData1.h"
 
 std::string load_file_2();
 
 
 void read_time_sheet();
 
-// void compare_records(Entry&, Entry&);
+
 
 
 std::string tokenize(std::string const&);

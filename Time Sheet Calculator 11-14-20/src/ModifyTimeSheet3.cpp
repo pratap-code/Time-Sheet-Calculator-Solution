@@ -41,6 +41,7 @@ void modify()
 			while (choice == "y")
 			{
 
+				std::cout << "Time Sheet records are loaded!" << std::endl;
 				modify_records(text_records, binary_records);
 				std::cout << "Do you want to continue editing vector ? : ";
 				getline(std::cin, choice);
@@ -83,7 +84,7 @@ void modify()
 	}
 	else
 	{
-		std::cout << "Returning to the main menu..." << std::endl << std::endl;
+		std::cout << "Time Sheet not modified!!\nReturning to the main menu..." << std::endl << std::endl;
 		return;
 	}
 
@@ -285,7 +286,7 @@ void add_records(std::vector<Entry>&records)
 			int temp_sno{ stored_sno };
 			input.reset();
 			entry.reset();
-			input.get_input(stored_day, stored_month, stored_year );
+			input.get_input( stored_day, stored_month, stored_year );
 			input.process_data();
 			entry.construct(input);
 			entry.set_sno(temp_sno);
@@ -294,6 +295,7 @@ void add_records(std::vector<Entry>&records)
 		records.push_back(entry);
 
 		++stored_sno;
+		++stored_day;
 
 		std::cout << "Do you wish to enter more ? ";
 		getline(std::cin, choice);

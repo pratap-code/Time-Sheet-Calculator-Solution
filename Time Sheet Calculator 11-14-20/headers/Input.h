@@ -70,4 +70,8 @@ public:
     std::string getnotes();
 
     void get_mod_input();
+
+    void auto_set_DateTime(int&, int&, int&, const char*);
+    void set_time(const char*);
+
 };

@@ -29,7 +29,7 @@ public:
 
 	void display();
 
-	void set_DateTime();
+	
 
 	int get_Date(const char*);
 

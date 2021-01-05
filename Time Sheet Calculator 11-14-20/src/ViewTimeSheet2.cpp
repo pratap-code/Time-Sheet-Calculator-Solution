@@ -41,16 +41,15 @@ void read_time_sheet()
 	read_records(binary_file, binary_e, binary_records, "binary");
 
 	if (check_records(text_records, binary_records))
+	{
 		std::cout << "RECORDS VERIFIED!" << std::endl << std::endl;
-
+		std::cout << "The contents in the time sheet are >>--->" << std::endl;
+		display_vector(binary_records);
+	}
 	else
 	{
 		std::cout << "FATAL ERROR!!! \t text and binary records do not match!!!" << std::endl;
 	}
-
-	display_records(text_records, "text");
-	std::cout << std::endl << std::endl;
-	display_records(binary_records, "binary");
 
 
 
@@ -85,7 +84,7 @@ std::string load_file_2()
 std::string tokenize(std::string const& line)
 {
 	std::string temp(line);
-	std::size_t found = temp.find_first_of("*/:->|");
+	std::size_t found = temp.find_first_of("*/:~>|");
 
 	if (found == std::string::npos)
 		std::cout << "BAD FILE FORMAT!!!" << std::endl;
@@ -93,7 +92,7 @@ std::string tokenize(std::string const& line)
 	while (found != std::string::npos)
 	{
 		temp[found] = ' ';
-		found = temp.find_first_of("*/:->|",found+1);
+		found = temp.find_first_of("*/:~>|",found+1);
 	}
 
 	return temp;
