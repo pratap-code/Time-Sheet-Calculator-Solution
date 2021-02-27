@@ -14,7 +14,7 @@ private:
 
 public:
 	DateTime();
-	
+
 	void reset();
 
 	bool check_DateTime_validity();
@@ -29,9 +29,16 @@ public:
 
 	void display();
 
-	
 
-	int get_Date(const char*);
+
+	int get_Date(const char*) const;
 
 	friend bool operator==(const DateTime&, const DateTime&);
+
+	int get_Time_num(const char*) const;
+
+	char get_Time_ap() const;
+
+	double get_hh(const char*) const;
+
 };

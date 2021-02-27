@@ -42,7 +42,7 @@ void modify()
 			{
 
 				std::cout << "Time Sheet records are loaded!" << std::endl;
-				modify_records(text_records, binary_records);
+				modify_records(binary_records);
 				std::cout << "Do you want to continue editing vector ? : ";
 				getline(std::cin, choice);
 			}
@@ -96,14 +96,13 @@ void modify()
 }
 
 
-void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_records)
+void modify_records(std::vector<Entry>&binary_records)
 {
 	
 	std::cout << "What would you like to do? : "<<std::endl;
 	std::cout << "1. Add entries" << std::endl;
 	std::cout << "2. Insert an entry" << std::endl;
 	std::cout << "3. Delete an entry" << std::endl;
-	std::cout << "4. Modify an entry" << std::endl;
 
 	int choice{ get_int() };
 
@@ -136,36 +135,10 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 		case 2:
 		{
 			std::cout << "+++++ INSERT AN ENTRY +++++" << std::endl << std::endl;
-			std::cout << "Enter the serial number where you would like to insert the entry : ";
+			insert(binary_records);
 
-			int sno{ get_int() };
-
-		
-			if ( sno <= 0 || sno > (binary_records.size()+1) )
-			{
-				std::cout << "Invalid serial no. entered!!!" << std::endl;
-				return;
-			}
-
-			Entry entry;
-			Input input;
-
-			do
-			{
-				input.reset();
-				entry.reset();
-				input.get_mod_input();
-				input.process_data();
-				entry.construct(input);
-				entry.set_sno(sno);
-			} while (!entry.check_entry_validity());
-
-			insert(text_records, sno, entry);
-			insert(binary_records, sno, entry);
-
-			std::cout << std::endl << "Displaying new vector data for both text and binary :" << std::endl << std::endl;
-			
-			display_vector(text_records);
+			std::cout << std::endl << "Displaying new vector data :" << std::endl << std::endl;
+	
 			display_vector(binary_records);
 
 
@@ -183,31 +156,24 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 			int sno{ get_int() };
 			
 			std::cout << std::endl << std::endl;
-			display_vector(text_records);
-			std::cout<<std::endl;
-			display_vector(binary_records);
-			std::cout << "Delete entry at serial no. " << sno << " ? : ";
-			std::string choice;
-			getline(std::cin, choice);
-			if (choice == "y")
-			{
-				std::cout << "Deleting entries..." << std::endl;
-				delete_rec(text_records, sno);
-				delete_rec(binary_records, sno);
 
-				display_vector(text_records);
+			if (sno > 0 && sno <= binary_records.size())
+			{
 				display_vector(binary_records);
+				std::cout << "Delete entry at serial no. " << sno << " ? : ";
+				std::string choice;
+				getline(std::cin, choice);
+				if (choice == "y")
+				{
+					std::cout << "Deleting entries..." << std::endl;
+					delete_rec(binary_records, sno);
+					display_vector(binary_records);
+				}
+				else
+					std::cout << "Not deleting any entry from records!" << std::endl;
 			}
 			else
-				std::cout << "Not deleting any entry from records!" << std::endl;
-
-			break;
-		}
-		case 4:
-		{
-			
-
-
+				std::cout << "Invalid serial no. entered!!!" << std::endl << std::endl;
 			break;
 		}
 		default:
@@ -224,25 +190,53 @@ void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_r
 }
 
 
-void insert(std::vector<Entry>&records, int &sno, Entry &entry)
+void insert(std::vector<Entry>&records)
 {
 
-	if (sno == (records.size()+1))
-		records.push_back(entry);
+	std::cout << "Enter the serial number where you'd like to insert an entry : ";
+	int sno{ get_int() };
+
+	if (sno > 0 && sno <= ( records.size() ) )
+	{
+		Input input;
+		Entry entry;
+
+
+		int stored_day{ records[sno - 1].get_Date("day") + 1 };
+		int stored_month{ records[sno - 1].get_Date("month") };
+		int stored_year{ records[sno - 1].get_Date("year") };
+
+		do
+		{
+			input.reset();
+			entry.reset();
+			input.get_input(stored_day, stored_month, stored_year);
+			input.process_data();
+			entry.construct(input);
+			entry.set_sno(sno);
+		} while (!entry.check_entry_validity());
+
+		 records.insert((records.begin() + sno - 1), entry);
+
+		for (unsigned int i = sno; i < records.size(); ++i)
+			records[i].mod_sno("insert");
+
+		std::cout << "Entry successfully inserted!" << std::endl;
+
+	}
 	else
-		records.insert((records.begin()+sno - 1), entry);
-
-	for (unsigned int i = sno; i < records.size(); ++i)
-		records[i].mod_sno("insert");
-
-	std::cout << "Entry successfully inserted!" << std::endl;
+	{
+		std::cout << "FATAL ERROR OCCURED IN 'void insert(std::vector<Entry>&records)'!!!" << std::endl;
+		std::cout << "Returning to 'void modify_records(std::vector<Entry>&text_records, std::vector<Entry>&binary_records)'..." << std::endl;
+		return;
+	}
 	
 }
 
 void delete_rec(std::vector<Entry>&records, int s)
 {
 	unsigned int sno = static_cast<unsigned int>(s);
-	if (sno < 1||sno>records.size())
+	if (sno < 1 || sno > records.size())
 	{
 		std::cout << "WRONG SERIAL NUMBER ENTERED FOR DELETE OPERATION!!!" << std::endl;
 		return;

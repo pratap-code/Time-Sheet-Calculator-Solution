@@ -12,6 +12,8 @@ int main()
 {
 	//declaration of variables
 
+	std::cout << std::fixed;
+
 	std::string choice{ "y" };
 	while (choice == "y")
 	{

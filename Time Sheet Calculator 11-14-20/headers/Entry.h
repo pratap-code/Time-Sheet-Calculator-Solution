@@ -16,8 +16,8 @@ class Entry
 {
 
     int sno;
-    DateTime intime;
-    DateTime outtime;
+    DateTime in;
+    DateTime out;
 
     double mo;
     double totaltime;
@@ -56,6 +56,12 @@ public:
 
     friend bool operator==(const Entry&, const Entry&);
 
+    void calculate();
+
+    double hours_elapsed() const;
+
+
+    
 };
 
 

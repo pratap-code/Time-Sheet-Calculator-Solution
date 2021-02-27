@@ -9,6 +9,7 @@ int get_int()
 	if (!(word >> Choice))
 	{
 		std::cout << "Invalid option entered..." << std::endl;
+		return -999;
 	}
 	return Choice;
 }

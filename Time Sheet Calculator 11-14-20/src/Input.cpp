@@ -159,18 +159,18 @@ void Input::set_time(const char* time_type)
 
 
 
-void Input::set_intime()
-{
-    std::cout << "Enter IN TIME, FORMAT ( HOURS - MINS - AM/PM ) : ";
-    get_user_input();
-}
-
-
-void Input::set_outtime()
-{
-    std::cout << "Enter OUT TIME, FORMAT ( HOURS - MINS - AM/PM ) : ";
-    get_user_input();
-}
+//void Input::set_intime()
+//{
+//    std::cout << "Enter IN TIME, FORMAT ( HOURS - MINS - AM/PM ) : ";
+//    get_user_input();
+//}
+//
+//
+//void Input::set_outtime()
+//{
+//    std::cout << "Enter OUT TIME, FORMAT ( HOURS - MINS - AM/PM ) : ";
+//    get_user_input();
+//}
 
 void Input::set_other()
 {
@@ -204,81 +204,49 @@ void Input::set_other()
 
 
 
-
-void Input::auto_set_date(int &day, int &month, int &year)  // check for 0 value of temp
-{
-    std::string choice;
-    
-    
-    std::cout << "Do you want to use this AUTO DATE, (y for yes, l for day before, e for manually enter ) ** " << day << " / " << month <<" / "<< year << " **   : ";
-    getline(std::cin, choice);
-    if (choice == "y")
-    {
-        ss << day << " " << month <<" "<<year; 
-       
-    }
-    else if (choice == "l")
-    {
-        day = day - 1;
-        ss << day << " " << month <<" "<<year;
-        
-    }
-    else if (choice == "e")
-    {
-        std::cout << "Enter the DATE, FORMAT ( DD - MM - YYYY ) : ";
-        getline(std::cin, user_input);
-        std::stringstream tmp;
-        int tempday{ 0 }, tempmonth{ 0 }, tempyear{ 0 };
-        tmp << user_input;
-        ss << user_input;
-        tmp >> tempday >> tempmonth >> tempyear;
-        day = tempday;
-        month = tempmonth;
-        year = tempyear;
-        user_input.clear();
-    }
-    else
-        std::cout << "Invalid choice!!!" << std::endl;
-
- 
-
-}
-
+//void Input::auto_set_date(int &day, int &month, int &year)  // check for 0 value of temp
+//{
+//    std::string choice;
+//    
+//    
+//    std::cout << "Do you want to use this AUTO DATE, (y for yes, l for day before, e for manually enter ) ** " << day << " / " << month <<" / "<< year << " **   : ";
+//    getline(std::cin, choice);
+//    if (choice == "y")
+//    {
+//        ss << day << " " << month <<" "<<year; 
+//       
+//    }
+//    else if (choice == "l")
+//    {
+//        day = day - 1;
+//        ss << day << " " << month <<" "<<year;
+//        
+//    }
+//    else if (choice == "e")
+//    {
+//        std::cout << "Enter the DATE, FORMAT ( DD - MM - YYYY ) : ";
+//        getline(std::cin, user_input);
+//        std::stringstream tmp;
+//        int tempday{ 0 }, tempmonth{ 0 }, tempyear{ 0 };
+//        tmp << user_input;
+//        ss << user_input;
+//        tmp >> tempday >> tempmonth >> tempyear;
+//        day = tempday;
+//        month = tempmonth;
+//        year = tempyear;
+//        user_input.clear();
+//    }
+//    else
+//        std::cout << "Invalid choice!!!" << std::endl;
+//
+// 
+//
+//}
 
 
 
-void Input::get_mod_input()
-{
-    std::cout << "Please enter the entry FORMAT( [IN]->DD MM YYYY | [IN]->HH MM AP | [O]->DD MM YYYY | [O]->HH MM AP | MO | NOTES ) :" << std::endl;
-    getline(std::cin, user_input);
-    std::stringstream temp{ user_input };
 
-    ss.str("");
-    ss.clear();
-    ss.seekp(0L, std::ios::beg);
 
-    ss << user_input;
-
-    int count{};
-    std::string word;
-
-    while (temp >> word)
-        count++;
-
-    if (count == 12)
-        ss << " " << 0.00 << " " << "-----";
-    else if (count == 13)
-        ss << " " << "-----";
-    else if (count == 10)
-    {
-        char c{ '0' };
-    }
-    else
-        std::cout << "Input ERROR!!!" << std::endl;
-
-    user_input.clear();
-
-}
 
 
 void Input::auto_set_DateTime(int &stored_day, int &stored_month, int &stored_year, const char* time_type)

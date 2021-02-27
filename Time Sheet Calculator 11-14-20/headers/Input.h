@@ -29,14 +29,14 @@ public:
     void get_user_input();
     
  
-    void set_intime();
-    void set_outtime();
+    //void set_intime();
+    //void set_outtime();
   
     void set_other();
 
     
 
-    void auto_set_date(int&, int&, int&);
+    // void auto_set_date(int&, int&, int&);
 
    
 
@@ -47,6 +47,7 @@ public:
 
     //getter functions
 
+    
     int getoday();
     
     int getomonth();
@@ -69,7 +70,6 @@ public:
 
     std::string getnotes();
 
-    void get_mod_input();
 
     void auto_set_DateTime(int&, int&, int&, const char*);
     void set_time(const char*);

@@ -2,6 +2,8 @@
 
 #include "common.h"
 
+
+
 //definition of time class
 class Time
 {
@@ -26,5 +28,19 @@ public:
     void display();
 
     friend bool operator==(const Time&, const Time&);
+
+    //getters
+
+    int get_hours() const;
+    int get_mins() const;
+    char get_ap() const;
+
+    double convert(const char *) const;
+
+    void sett_time();
+
+    
+
+
 };
 

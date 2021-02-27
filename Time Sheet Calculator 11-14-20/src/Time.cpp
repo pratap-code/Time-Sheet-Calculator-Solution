@@ -93,3 +93,137 @@ bool operator==(const Time& t1, const Time& t2)
     else
         return false;
 }
+
+int Time::get_hours() const
+{
+    return hours;
+}
+
+int Time::get_mins() const
+{
+    return mins;
+}
+
+char Time::get_ap() const
+{
+    return ap;
+}
+
+double Time::convert(const char* type) const
+{
+    double result{};
+
+    if (hours == 12)
+    {
+        if (ap == 'p')
+        {
+            result = 12.0 + ((static_cast<double>(mins) / 60.0));
+        }
+        else if (ap == 'a')
+        {
+            if (mins == 0)
+            {
+                if (type == "in")
+                {
+                    result = 0.0;
+                }
+                else if (type == "out")
+                {
+                    result = 24.0;
+                }
+                else
+                {
+                    result = -1.0;
+                }
+
+            }
+            else
+            {
+                result = (static_cast<double>(mins) / 60.0);
+            }
+        }
+        else
+        {
+            result = -1.0;
+        }
+    }
+    else
+    {
+        if (ap == 'a')
+        {
+            result = (static_cast<double>(hours)) + ((static_cast<double>(mins)) / 60.0) ;
+        }
+        else if (ap == 'p')
+        {
+            result = (static_cast<double>(hours)) + 12.0 + ((static_cast<double>(mins)) / 60.0);
+        }
+    }
+
+
+    return result;
+    
+    //{
+    //if (hours == 12 && mins == 0 && ap == 'a' && type == "in")
+    //{
+    //    result = 0.00;
+    //}
+    //else if (hours == 12 && mins == 0 && ap == 'a' && type == "out")
+    //{
+    //    result == 24.00;
+    //}
+    //else if (hours == 12 && ap == 'a')
+    //{
+    //    result = (static_cast<double>(mins) / 60.0);
+    //}
+    //else if (hours == 12 && ap == 'p')
+    //{
+    //    result = 12.0 + (static_cast<double>(mins) / 60.0);
+    //}
+    //
+    //else if (ap == 'a')
+    //{
+    //    result = static_cast<double>(hours) + (static_cast<double>(mins) / 60.0);
+    //}
+    //else if (ap == 'p')
+    //{
+    //    result = static_cast<double>(hours) + 12.0 + (static_cast<double>(mins) / 60.0);
+    //}
+    //else
+    //{
+    //    std::cout << "ERROR!!! ERROR OCCURED IN `double Time::convert() const` !!!" << std::endl;
+    //    result = -1.00;
+    //}
+    //
+    //
+    //if (result >= 0.0 && result <= 24.0)
+    //    return result;
+    //else
+    //{
+    //    std::cout << "Error occured while converting time to 24 hour format!!!" << std::endl;
+    //    return -2.00;
+    //}
+    //
+    //}
+}
+
+
+
+
+void Time::sett_time()
+{
+    std::string data;
+
+    std::cout << "enter the time : ";
+    getline(std::cin, data);
+    std::stringstream strstm;
+    strstm << data;
+    std::cout << "Now extracting data..." << std::endl;
+    strstm.clear();
+    strstm.seekg(0L, std::ios::beg);
+    strstm >> hours >> mins >> ap;
+    std::cout << "Time is : " << hours << " : " << mins << " " << ap<<std::endl;
+
+    std::cout << "24 hour format of time is : " << convert("in") << std::endl;;
+
+
+}

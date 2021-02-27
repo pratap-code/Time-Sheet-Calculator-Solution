@@ -6,7 +6,7 @@
 //definition for class date
 class Date
 {
-       
+
     int day;
     int month;
     int year;
@@ -14,7 +14,7 @@ class Date
 public:
     Date(int day = 0, int month = 0, int year = 0);
 
-    
+
 
     bool check_date_validity();
 
@@ -32,13 +32,15 @@ public:
 
     void display();
 
-    int get_day();
+    int get_day() const;
 
-    int get_month();
+    int get_month() const;
 
-    int get_year();
+    int get_year() const;
 
     friend bool operator==(const Date&, const Date&);
+
+    friend int operator-(const Date&, const Date&);
 
 };
 

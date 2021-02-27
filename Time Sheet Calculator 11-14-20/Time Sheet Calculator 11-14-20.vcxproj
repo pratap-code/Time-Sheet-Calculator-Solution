@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="headers\CalculateTimeSheet.h" />
     <ClInclude Include="headers\common.h" />
     <ClInclude Include="headers\DateTime.h" />
     <ClInclude Include="headers\EnterData1.h" />

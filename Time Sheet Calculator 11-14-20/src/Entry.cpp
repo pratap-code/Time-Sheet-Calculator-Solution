@@ -11,8 +11,8 @@ Entry::Entry() : sno{ 0 }, mo{ 0.0 }, totaltime{ 0.0 }, totalpay{ 0.0 }, netpay{
 void Entry::reset()
 {
 	sno = 0;
-	intime.reset();
-	outtime.reset();
+	in.reset();
+	out.reset();
 	mo = 0.0;
 	totaltime = 0.0;
 	totalpay = 0.0;
@@ -24,9 +24,9 @@ void Entry::reset()
 
 void Entry::construct(Input& i)
 {
-	intime.construct(i.getiday(), i.getimonth(), i.getiyear(), i.getinhours(), i.getinmins(), i.getinap());
+	in.construct(i.getiday(), i.getimonth(), i.getiyear(), i.getinhours(), i.getinmins(), i.getinap());
 	
-	outtime.construct(i.getoday(), i.getomonth(), i.getoyear(), i.getouthours(), i.getoutmins(), i.getoutap());
+	out.construct(i.getoday(), i.getomonth(), i.getoyear(), i.getouthours(), i.getoutmins(), i.getoutap());
 	
 	mo = i.getmo();
 	notes = i.getnotes();
@@ -36,10 +36,37 @@ void Entry::construct(Input& i)
 
 bool Entry::check_entry_validity()
 {
-	if (sno > 0 && intime.check_DateTime_validity() && outtime.check_DateTime_validity())
+	if (sno > 0 && in.check_DateTime_validity() && out.check_DateTime_validity())
 	{
-		std::cout << "Entry is valid!!!" << std::endl;
-		return true;
+		if (in.get_Date("day") <= out.get_Date("day") && in.get_Date("month") == out.get_Date("month")
+			&& in.get_Date("year") == out.get_Date("year"))
+		{
+			if (in.get_Date("day") == out.get_Date("day"))
+			{
+				if (in.get_hh("in") < out.get_hh("out"))
+				{
+					std::cout << "Entry is valid!" << std::endl;
+					return true;
+				}
+				else
+				{
+					std::cout << "Entry is Invalid!!!" << std::endl;
+					return false;
+				}
+			}
+			else
+			{
+				std::cout << "Entry is valid!" << std::endl;
+				return true;
+			}
+		}
+		else
+		{
+			std::cout << "Entry is Invalid!!!" << std::endl;
+			return false;
+		}
+
+		
 	}
 	else
 	{
@@ -56,9 +83,9 @@ void Entry::display()
 {
 	std::cout << sno << ".";
 	std::cout << " | ";
-	intime.display();
+	in.display();
 	std::cout << " | ";
-	outtime.display();
+	out.display();
 	std::cout << " | " << mo << " | " << totaltime << " | " << totalpay << " | " << netpay << " | " << "'" << notes << "'" << std::endl;
 }
 
@@ -68,9 +95,9 @@ void Entry::write_text(std::ofstream& o) const
 {
 	o << sno << "*";
 	o << " | ";
-	intime.write_text(o);
+	in.write_text(o);
 	o << " | ";
-	outtime.write_text(o);
+	out.write_text(o);
 	o << " | ";
 	o << mo;
 	o << " | ";
@@ -87,8 +114,8 @@ void Entry::write_text(std::ofstream& o) const
 void Entry::write_binary(std::ofstream& o) const
 {
 	o.write(reinterpret_cast<const char*>(&sno), sizeof(sno));
-	intime.write_binary(o);
-	outtime.write_binary(o);
+	in.write_binary(o);
+	out.write_binary(o);
 	o.write(reinterpret_cast<const char*>(&mo), sizeof(mo));
 	o.write(reinterpret_cast<const char*>(&totaltime), sizeof(totaltime));
 	o.write(reinterpret_cast<const char*>(&totalpay), sizeof(totalpay));
@@ -114,8 +141,8 @@ void Entry::read_text(std::string line)
 		t_mo >> t_totaltime >> t_totalpay >> t_netpay >> t_notes;
 
 	sno = t_sno;
-	intime.construct( t_inday, t_inmonth, t_inyear, t_inhour, t_inmin, t_inap );
-	outtime.construct( t_outday, t_outmonth, t_outyear, t_outhour, t_outmin, t_outap );
+	in.construct( t_inday, t_inmonth, t_inyear, t_inhour, t_inmin, t_inap );
+	out.construct( t_outday, t_outmonth, t_outyear, t_outhour, t_outmin, t_outap );
 	mo = t_mo;
 	totaltime = t_totaltime;
 	totalpay = t_totalpay;
@@ -129,8 +156,8 @@ void Entry::read_binary(std::ifstream& i)
 {
 
 	i.read(reinterpret_cast<char*>(&sno), sizeof(sno));		
-	intime.read_binary(i);	
-	outtime.read_binary(i);	
+	in.read_binary(i);	
+	out.read_binary(i);	
 	i.read(reinterpret_cast<char*>(&mo), sizeof(mo));	
 	i.read(reinterpret_cast<char*>(&totaltime), sizeof(totaltime));	
 	i.read(reinterpret_cast<char*>(&totalpay), sizeof(totalpay));	
@@ -172,11 +199,11 @@ int Entry::get_Date(const char* type)
 	int value{};
 
 	if (type == "day")
-		value=outtime.get_Date("day");
+		value=out.get_Date("day");
 	else if (type == "month")
-		value=outtime.get_Date("month");
+		value=out.get_Date("month");
 	else if (type == "year")
-		value=outtime.get_Date("year");
+		value=out.get_Date("year");
 	else
 		std::cout << "Something went wrong while loading date from RECORDS ON THE HARD DRIVE!!!" << std::endl;
 
@@ -185,9 +212,36 @@ int Entry::get_Date(const char* type)
 
 bool operator==(const Entry& e1, const Entry& e2)
 {
-	if (e1.sno == e2.sno && e1.intime == e2.intime && e1.outtime == e2.outtime && e1.mo == e2.mo
+	if (e1.sno == e2.sno && e1.in == e2.in && e1.out == e2.out && e1.mo == e2.mo
 		&& e1.totaltime == e2.totaltime && e1.totalpay == e2.totalpay && e1.netpay == e2.netpay && e1.notes == e2.notes)
 		return true;
 	else
 		return false;
+}
+
+
+
+void Entry::calculate()
+{
+	
+
+
+}
+
+
+double Entry::hours_elapsed() const
+{
+	double value{};
+	int days{ (out.get_Date("day") - in.get_Date("in")) };
+	
+	if (days == 0)
+	{
+		value = out.get_hh("out") - in.get_hh("in");
+	}
+	else
+	{
+		value = (static_cast<double>(24.00 * days)) + (24.00 - in.get_hh("in")) + out.get_hh("out");
+	}
+
+	return value;
 }

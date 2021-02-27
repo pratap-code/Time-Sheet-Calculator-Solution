@@ -69,17 +69,17 @@ void Date::write_text(std::ofstream& o) const
 }
 
 
-int Date::get_day()
+int Date::get_day() const
 {
     return day;
 }
 
-int Date::get_month()
+int Date::get_month() const
 {
     return month;
 }
 
-int Date::get_year()
+int Date::get_year() const
 {
     return year;
 }
@@ -91,4 +91,17 @@ bool operator==(const Date& d1, const Date& d2)
         return true;
     else
         return false;
+}
+
+int operator-(const Date &in, const Date &out)
+{
+    if (in.day <= out.day && in.month == out.month && in.year == out.year)
+    {
+        return (out.day - in.day -1);
+    }
+    else
+    {
+        std::cout << "Error occured while performing - operation between out and in dates!!!" << std::endl << std::endl;
+        return -1;
+    }
 }

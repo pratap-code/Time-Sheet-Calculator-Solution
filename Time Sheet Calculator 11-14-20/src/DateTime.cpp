@@ -69,7 +69,7 @@ bool operator==(const DateTime& obj1, const DateTime& obj2)
 }
 
 
-int DateTime::get_Date(const char* type)
+int DateTime::get_Date(const char* type) const
 {
 	int value{};
 	if (type == "day")
@@ -92,4 +92,40 @@ int DateTime::get_Date(const char* type)
 		std::cout << "UNEXPECTED BEHAVIOUR AT 'int DateTime::get_Date(const char* type)' in DateTime.cpp!!!" << std::endl;
 		return -1;
 	}
+}
+
+
+int DateTime::get_Time_num(const char* type) const
+{
+	int value{};
+	
+	if (type == "hours")
+	{
+		value = time.get_hours();
+		return value;
+	}
+	else if (type == "mins")
+	{
+		value = time.get_mins();
+		return value;
+	}
+	else
+	{
+		std::cout << "ERROR OCCURED IN `int DateTime::get_Time_num(const char*) const` !!!" << std::endl << std::endl;
+		return -1;
+	}
+}
+
+char DateTime::get_Time_ap() const
+{
+	char value{};
+	value = time.get_ap();
+	return value;
+}
+
+
+double DateTime::get_hh(const char * type) const
+{
+	double result{ time.convert(type) };
+	return result;
 }

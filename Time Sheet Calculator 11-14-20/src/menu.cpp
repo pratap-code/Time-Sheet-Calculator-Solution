@@ -26,7 +26,7 @@ void menu()
 	std::cout << "3. Modify time sheet" << std::endl;
 	std::cout << "4. Delete a time sheet file" << std::endl;
 	std::cout << "5. Calculate time and pay" << std::endl;
-	std::cout << "6. Load a new file" << std::endl;
+	std::cout << "6. Test" << std::endl;
 	std::cout << "7. Exit" << std::endl;
 
 
@@ -52,6 +52,34 @@ void menu()
 	case 3:
 	{
 		modify();
+		break;
+	}
+	case 4:
+	{
+
+		break;
+	}
+	case 5:
+	{
+		
+		break;
+	}
+	case 6:
+	{
+		std::string choice{ "y" };
+		while (choice == "y")
+		{
+			Time t;
+			t.sett_time();
+			
+			std::cout << "Do you wish to check more ? : ";
+			getline(std::cin, choice);
+		}
+		break;
+	}
+	case 7:
+	{
+
 		break;
 	}
 
