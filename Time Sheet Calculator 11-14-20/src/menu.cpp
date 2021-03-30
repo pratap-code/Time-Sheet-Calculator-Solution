@@ -5,6 +5,7 @@
 #include "..\headers\EnterData1.h"
 #include "..\headers\ViewTimeSheet2.h"
 #include "..\headers\ModifyTimeSheet3.h"
+#include "..\headers\fixed.h"
 
 
 void menu();
@@ -69,17 +70,24 @@ void menu()
 		std::string choice{ "y" };
 		while (choice == "y")
 		{
-			Time t;
-			t.sett_time();
+			fixed f;
+			std::cout << std::endl;
+			f.display();
+			std::cout << "Enter a float : ";
+			f.set();
+			std::cout << "fixed has value : ";
+			f.display();
+			std::cout << " and floating value : " << f.get();
+			std::cout << std::endl;
 			
-			std::cout << "Do you wish to check more ? : ";
+			std::cout << "Do you wish to test more ? : ";
 			getline(std::cin, choice);
 		}
 		break;
 	}
 	case 7:
 	{
-
+		
 		break;
 	}
 

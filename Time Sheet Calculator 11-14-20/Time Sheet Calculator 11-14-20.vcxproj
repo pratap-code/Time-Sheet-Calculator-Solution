@@ -162,6 +162,7 @@
     <ClInclude Include="headers\CalculateTimeSheet.h" />
     <ClInclude Include="headers\common.h" />
     <ClInclude Include="headers\DateTime.h" />
+    <ClInclude Include="headers\fixed.h" />
     <ClInclude Include="headers\EnterData1.h" />
     <ClInclude Include="headers\Date.h" />
     <ClInclude Include="headers\Entry.h" />
@@ -187,6 +188,7 @@
     </ClCompile>
     <ClCompile Include="src\DateTime.cpp" />
     <ClCompile Include="src\EnterData1.cpp" />
+    <ClCompile Include="src\fixed.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Date.cpp" />
     <ClCompile Include="src\Entry.cpp" />

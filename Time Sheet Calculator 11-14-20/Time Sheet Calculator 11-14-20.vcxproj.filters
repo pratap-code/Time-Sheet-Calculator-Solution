@@ -45,6 +45,9 @@
     <ClInclude Include="headers\CalculateTimeSheet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="headers\fixed.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -78,6 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\DateTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\fixed.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
