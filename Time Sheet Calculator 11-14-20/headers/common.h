@@ -9,4 +9,6 @@
 
 int get_int();
 
+double get_double();
+
 

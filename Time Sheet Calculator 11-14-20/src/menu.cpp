@@ -74,7 +74,13 @@ void menu()
 			std::cout << std::endl;
 			f.display();
 			std::cout << "Enter a float : ";
-			f.set();
+			double num{};
+			num = get_double();
+
+			std::cout << "Converting floating point value to fixed point value..." << std::endl;
+
+			f.create(num);
+			
 			std::cout << "fixed has value : ";
 			f.display();
 			std::cout << " and floating value : " << f.get();
