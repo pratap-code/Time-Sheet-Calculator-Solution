@@ -27,7 +27,7 @@ bool Time::check_time_validity()
 
 
 
-void Time::set_time(int hoursVal, int minsVal, char apVal)
+void Time::set_time(int hoursVal, int minsVal, char apVal) // maybe not used anywhere, need to get rid of
 {
     hours = hours;
     mins = minsVal;
@@ -56,19 +56,19 @@ void Time::construct(int ihours, int imins, char iap)
     ap = iap;
 }
 
-void Time::display()
+void Time::display() const  // displays time object in formatted format
 {
     std::cout << hours << ":" << mins << " " << ap;
 }
 
 
-void Time::write_text(std::ofstream& o) const
+void Time::write_text(std::ofstream& o) const // to write the time object in formatted text format
 {
     o << hours << ":" << mins << " " << ap;
 }
 
 
-void Time::write_binary(std::ofstream& o) const
+void Time::write_binary(std::ofstream& o) const // to write time object in binary format
 {
     o.write(reinterpret_cast<const char*>(&hours), sizeof(hours));
     o.write(reinterpret_cast<const char*>(&mins), sizeof(mins));
@@ -77,7 +77,7 @@ void Time::write_binary(std::ofstream& o) const
 
 
 
-void Time::read_binary(std::ifstream& i)
+void Time::read_binary(std::ifstream& i)  // to read time object from binary file
 {
     i.read(reinterpret_cast<char*>(&hours), sizeof(hours));
     i.read(reinterpret_cast<char*>(&mins), sizeof(mins));
@@ -86,7 +86,7 @@ void Time::read_binary(std::ifstream& i)
 
 
 
-bool operator==(const Time& t1, const Time& t2)
+bool operator==(const Time& t1, const Time& t2)  // to check if two times are equal
 {
     if (t1.hours == t2.hours && t1.mins == t2.mins && t1.ap == t2.ap)
         return true;
@@ -94,6 +94,10 @@ bool operator==(const Time& t1, const Time& t2)
         return false;
 }
 
+
+
+
+// getters
 int Time::get_hours() const
 {
     return hours;
@@ -109,7 +113,12 @@ char Time::get_ap() const
     return ap;
 }
 
-double Time::convert(const char* type) const
+
+
+// MAYBE NEED TO WRITE THIS AGAIN WHERE IT CALCULATES THE TOTAL DIFFERENCE BY CALCULATING TOTAL MINS FIRST
+// AND THEN CALCULATE THE DIFFERENCE
+// to convert time to 24 hr format -----> this is needed to calculate the differences in time 
+double Time::convert(const char* type) const   // type is in or out meaning in time or out time
 {
     double result{};
 
@@ -156,6 +165,10 @@ double Time::convert(const char* type) const
         else if (ap == 'p')
         {
             result = (static_cast<double>(hours)) + 12.0 + ((static_cast<double>(mins)) / 60.0);
+        }
+        else                // added this on 9/24/21
+        {
+            result = -1.0;
         }
     }
 

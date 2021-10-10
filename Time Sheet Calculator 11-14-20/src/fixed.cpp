@@ -328,3 +328,130 @@ void fixed::create(double num)
 
 
 }
+
+
+
+void fixed::set_round(std::string &parsed_str) // ovderload for fixed::create() tp
+{
+	std::stringstream sstr(parsed_str);
+	std::vector<std::string>words;
+	std::string word;
+	std::stringstream temp(sstr.str()); // to detect sign by counting number of words
+	int count{};
+	while (temp >> word)
+	{
+		++count;
+		words.push_back(word);
+	}
+	
+	if (count == 1)
+	{
+		sstr >> value;
+		n = 0;
+	}
+	else if (count == 2)
+	{
+		if (words[0] == "-")
+		{
+			char sign{};
+			sstr >> sign >> value;
+			value = -value;
+			n = 0;
+		}
+		else // proceed for +ve decimal number
+		{
+			size_t places{};
+			places = words[1].length();
+			n = places;
+	
+			int w{}, d{};
+			sstr >> w >> d;
+	
+			value = (w * pow(10, n)) + d;
+		}
+	}
+	else if (count == 3)
+	{
+		char sign{};
+		int w{}, d{};
+	
+		sstr >> sign >> w >> d;
+	
+		size_t places{};
+		places = words[2].length();
+		n = places;
+	
+		value = -((w * pow(10, n)) + d);
+	}
+	else
+	{
+		std::cout << "ERROR OCCURED IN 'void fixed::set() in fixed.cpp'!!!" << std::endl;
+		value = -9999999;
+	}
+}
+
+
+
+void round(std::string dec)
+{
+	//size_t l{};
+	//l = dec.length();
+
+	//if (l >= 3)
+	//{
+	//	std::stringstream digit;
+	//	int third{};
+	//	digit << dec[3];
+	//	digit.clear();
+	//	digit.seekp(0L, std::ios::beg);
+	//	digit >> third;
+	//	if (third >= 5)
+	//	{
+	//		digit.str("");
+	//		digit.clear();
+	//		digit.seekg(0L, std::ios::beg);
+	//
+	//		digit << dec[2];
+	//
+	//
+	//		digit.seekg(0L, std::ios::beg);
+	//
+	//	}
+	//}
+
+	std::stringstream decstm;
+	decstm << dec;
+
+	size_t count = dec.length();
+
+	if (count == 0)
+	{
+
+	}
+	else if (count == 1)
+	{
+		dec.push_back('0');
+	}
+	else if (count == 2)
+	{
+
+	}
+	else if (count >= 3)
+	{
+		std::string temp;
+		
+		if(dec[2]=='5'|| dec[2] == '6' || dec[2] == '7' || dec[2] == '8' || dec[2] == '9')
+		{ 
+			std::stringstream stm;
+			stm << dec[0] << dec[1];
+			int num{};
+
+		}
+
+	}
+
+
+
+	
+
+}

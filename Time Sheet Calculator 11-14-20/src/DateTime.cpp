@@ -52,7 +52,7 @@ void DateTime::construct(int day, int month, int year, int hour, int min, char a
 	time.construct(hour, min, ap);
 }
 
-void DateTime::display()
+void DateTime::display() const
 {
 	date.display();
 	std::cout << " ~> ";

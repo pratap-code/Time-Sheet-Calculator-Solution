@@ -30,7 +30,7 @@ public:
 
     void construct(int, int, int);
 
-    void display();
+    void display() const;
 
     int get_day() const;
 
@@ -40,7 +40,7 @@ public:
 
     friend bool operator==(const Date&, const Date&);
 
-    friend int operator-(const Date&, const Date&);
+    friend int operator-(const Date&, const Date&);  // check this function's logic maybe it's not right
 
 };
 

@@ -12,7 +12,7 @@ int main()
 {
 	//declaration of variables
 
-	std::cout << std::fixed;
+	std::cout << std::fixed;    // why?
 
 	std::string choice{ "y" };
 	while (choice == "y")
@@ -25,5 +25,9 @@ int main()
 		
 	return 0;
 }
+
+
+
+// need to create and store multiple files vis a vis binary, text and unformatted text to test and verfiy
 
 

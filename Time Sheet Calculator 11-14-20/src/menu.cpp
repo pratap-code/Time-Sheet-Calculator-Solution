@@ -22,16 +22,16 @@ void menu()
 	std::cout << "******************TIME SHEET CALCULATOR******************" << std::endl << std::endl;
 
 	std::cout << "What would you like to do : " << std::endl;
-	std::cout << "1. Enter time sheet data" << std::endl;
-	std::cout << "2. View time sheet" << std::endl;
+	std::cout << "1. Enter time sheet data" << std::endl;      // creation of or addition to file takes place here --> NEED TO ADD APPEND FUNCTIONALITY TO THE FUNCTION
+	std::cout << "2. View time sheet" << std::endl;			   //just to open files	
 	std::cout << "3. Modify time sheet" << std::endl;
 	std::cout << "4. Delete a time sheet file" << std::endl;
-	std::cout << "5. Calculate time and pay" << std::endl;
+	std::cout << "5. Calculate time and pay" << std::endl;     //think about naming notation for files and how to process them
 	std::cout << "6. Test" << std::endl;
 	std::cout << "7. Exit" << std::endl;
 
 
-	int choice{ get_int() };
+	int choice{ get_int() };     // to get choice (type integer)
 
 
 

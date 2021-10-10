@@ -41,7 +41,7 @@ void Date::construct(int eday, int emonth, int eyear)
 }
 
 
-void Date::display()
+void Date::display() const
 {
     std::cout << day << "/" << month << "/" << year;
 }
@@ -93,7 +93,7 @@ bool operator==(const Date& d1, const Date& d2)
         return false;
 }
 
-int operator-(const Date &in, const Date &out)
+int operator-(const Date &in, const Date &out)  // check the logic here maybe not right
 {
     if (in.day <= out.day && in.month == out.month && in.year == out.year)
     {

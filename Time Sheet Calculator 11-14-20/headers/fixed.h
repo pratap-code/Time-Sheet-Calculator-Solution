@@ -25,4 +25,7 @@ public:
 
 	void create(double);
 
+	void set_round(std::string&);
+
+
 };

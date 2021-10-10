@@ -27,7 +27,7 @@ public:
 
 	void construct(int, int, int, int, int, char);
 
-	void display();
+	void display() const;
 
 
 

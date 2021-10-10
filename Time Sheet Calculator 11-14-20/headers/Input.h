@@ -22,7 +22,7 @@ class Input
 public:
     Input();
 
-    void get_input(int&,int&, int&);
+    void get_input(int&, int&, int&);  // arguments are stored day, time and year
     
     void process_data();
 
@@ -48,10 +48,7 @@ public:
     //getter functions
 
     
-    int getoday();
     
-    int getomonth();
-    int getoyear();
 
     int getiday();
     int getimonth();
@@ -59,6 +56,10 @@ public:
 
     int getinhours();
     int getinmins();
+
+    int getoday();
+    int getomonth();
+    int getoyear();
 
     int getouthours();
     int getoutmins();

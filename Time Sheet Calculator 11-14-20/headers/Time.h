@@ -14,7 +14,7 @@ class Time
 public:
     Time(int hours = 0, int mins = 0, char ap = 'n');
     bool check_time_validity();
-    void set_time(int hoursVal, int minsVal, char apVal);
+    void set_time(int hoursVal, int minsVal, char apVal);  // this is not used anywhere --> get rid of it
     void reset();
 
 
@@ -25,7 +25,7 @@ public:
 
     void construct(int, int, char);
 
-    void display();
+    void display() const;
 
     friend bool operator==(const Time&, const Time&);
 
@@ -35,7 +35,7 @@ public:
     int get_mins() const;
     char get_ap() const;
 
-    double convert(const char *) const;
+    double convert(const char *) const;  // to convert time to 24 hr format
 
     void sett_time();
 
