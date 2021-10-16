@@ -40,9 +40,9 @@ bool ifStrOnly(std::string str1, const char* str2)  // to see if str1 contains m
 }
 
 
-
+//this function has conventions for xinput that is the expected no of inputs
 //this is very powerful!! continue this later!
-void smart_input(std::string input, int xno, std::string xinput) // continue this later
+void smartt_input(std::string input, std::string xinput, int xno) // continue this later
 {
 	int count{};
 	std::string word;
@@ -56,7 +56,8 @@ void smart_input(std::string input, int xno, std::string xinput) // continue thi
 		words.push_back(word);
 	}
 
-	if (count == xno) // checking to see if the no. if terms in input is equal to the expected no. of terms and if so then proceed
+	// need to add a case for if xno is -1 here
+	if (count == xno || xno == -1) // checking to see if the no. if terms in input is equal to the expected no. of terms and if so then proceed
 	{
 
 	}

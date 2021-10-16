@@ -168,6 +168,7 @@
     <ClInclude Include="headers\Entry.h" />
     <ClInclude Include="headers\Input.h" />
     <ClInclude Include="headers\ModifyTimeSheet3.h" />
+    <ClInclude Include="headers\smart_input.h" />
     <ClInclude Include="headers\Time.h" />
     <ClInclude Include="headers\ViewTimeSheet2.h" />
   </ItemGroup>
@@ -195,6 +196,7 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\ModifyTimeSheet3.cpp" />
+    <ClCompile Include="src\smart_input.cpp" />
     <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\ViewTimeSheet2.cpp" />
   </ItemGroup>

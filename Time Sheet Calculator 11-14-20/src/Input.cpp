@@ -448,7 +448,24 @@ void Input::auto_set_DateTime(int& stored_day, int& stored_month, int& stored_ye
 
                 ss << stored_day << " " << stored_month << " " << stored_year << " " << words[2] << " " << words[3] << " " << words[4];
                 ss << " ";
+            }
+            else
+            {
+                std::cout << "Error!!! Incorrect input entered in 'void Input::auto_set_DateTime(int&, int&, int&, const char*)' in Input.cpp!!!" << std::endl;
+            }
+        }
+        else if (count == 6)
+        {
+            if (ifStrOnly(words[0], "0123456789") && ifStrOnly(words[1], "0123456789") && ifStrOnly(words[2], "0123456789"))
+            {
+                tmp.clear();                    // resetting the tmp stringstream
+                tmp.seekg(0L, std::ios::beg);
 
+
+            }
+            else
+            {
+                std::cout << "Error!!! Incorrect input entered in 'void Input::auto_set_DateTime(int&, int&, int&, const char*)' in Input.cpp!!!" << std::endl;
             }
         }
         else

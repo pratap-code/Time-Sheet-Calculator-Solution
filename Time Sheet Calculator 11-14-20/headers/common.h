@@ -16,4 +16,5 @@ double get_double();
 bool ifStrOnly(std::string, const char*); // to  find if a string is made up of specific characters
 
 
-void smart_input(std::string, int, std::string);  //this function is self-checking input taking function
+void smartt_input( std::string, std::string, int xno= -1 );  //this function is self-checking input taking function
+				// xno is the expected no of terms in the input and -1 signifies THERE CAN BE ANY NUMBER OF ARGUMENTS
