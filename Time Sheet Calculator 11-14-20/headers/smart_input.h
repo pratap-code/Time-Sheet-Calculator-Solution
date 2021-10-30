@@ -23,8 +23,7 @@ class smart_input
 
 		void parse_xinp();  // to parse xinp
 
-		void parse_input();
-
+		void parse();
 
 
 };
