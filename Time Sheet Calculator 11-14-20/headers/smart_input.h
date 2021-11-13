@@ -25,5 +25,9 @@ class smart_input
 
 		void parse();
 
+		void split(std::string&) const; // to split words depending on what kind of word it is
+
+		bool check_num(std::string&, char&) const;
+
 
 };
