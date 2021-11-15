@@ -262,7 +262,7 @@ bool smart_input::check_num(std::string& num, char& type) const
 						std::cout << "Valid double entered!" << std::endl;
 						return true;
 					}
-					else  // atleast 2 -ve signs exist
+					else  // atleast 2 -ve signs exist when pos_sign is not npos
 					{
 						std::cout << "Invalid!! Multiple -ve signs exist!!!" << std::endl;
 						return false;
@@ -294,6 +294,40 @@ bool smart_input::check_num(std::string& num, char& type) const
 			}
 			else if (pos_dot != std::string::npos && pos_sign != std::string::npos)  // if both exist  --> also add 0 at the beggining if . is at 2nd place
 			{
+				if (pos_sign == 0)  // proceed only if the sign is at 0th position
+				{
+					pos_sign = num.find_first_of("-", 1);  // look for another -ve sign
+
+					if (pos_sign == std::string::npos)   // if another -ve sign doesn't exist 
+					{
+						if (pos_dot == 1)   // if input is without zero at the beginning of the input
+							num.insert(1, "0");
+
+						pos_dot = num.find_first_of(".", (pos_dot + 1));   // look for another dot
+
+						if (pos_dot == std::string::npos)  // if another dot doesn't exist then valid
+						{
+							std::cout << "Valid double entered!" << std::endl;
+							return true;
+						}
+						else  // another dot exists
+						{
+							std::cout << "Invalid! Multiple dots exist!" << std::endl;
+							return false;
+						}
+
+					}
+					else  // another -ve sign exists 
+					{
+						std::cout << "Invalid! Multiple -ve signs exist!" << std::endl;
+						return false;
+					}
+				}
+				else    // sign not at the beginning of input so invalid
+				{
+					std::cout << "Invalid!! sign not at the beginning of input!" << std::endl;
+					return false;
+				}
 
 			}
 			else
